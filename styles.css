@@ -10,6 +10,7 @@
   --paper-2: #eef7ff;
   --white: #ffffff;
   --night: #0d1020;
+  --scroll-percent: 0%;
 }
 
 * { box-sizing: border-box; }
@@ -179,7 +180,117 @@ footer { background: #0b0e1b; color: #bcc4dc; padding: 26px 0; }
 .footer-brand strong { color: white; font-family: 'Trebuchet MS', Arial, sans-serif; letter-spacing: .08em; }
 .footer-brand span { font-size: 10px; margin-top: 2px; }
 .footer-inner a { color: white; font-weight: 700; }
-.floating-whatsapp { position: fixed; right: 22px; bottom: 22px; z-index: 40; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: white; font-size: 27px; box-shadow: 0 14px 30px rgba(17,91,47,.28); border: 4px solid white; }
+.floating-whatsapp {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 40;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #25d366;
+  color: white;
+  font-size: 27px;
+  box-shadow: 0 14px 30px rgba(17,91,47,.28);
+  border: 4px solid white;
+  transition: all 0.3s ease;
+}
+
+.floating-whatsapp img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 40px rgba(17,91,47,.35);
+}
+
+.back-to-top {
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  z-index: 40;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--purple);
+  color: white;
+  font-size: 20px;
+  box-shadow: 0 10px 25px rgba(85,70,255,.25);
+  border: 4px solid white;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: scale(1.15) translateY(-4px);
+  box-shadow: 0 16px 35px rgba(85,70,255,.35);
+}
+
+.service-card, .trust-item, .contact-card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card.animate-in, .trust-item.animate-in, .contact-card.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.service-card:hover, .trust-item:hover, .contact-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.hero-orb {
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.reveal-delay-1 {
+  opacity: 0;
+  transform: translateY(30px) translateZ(0);
+  transition: all 0.7s ease 0.1s;
+}
+
+.reveal-delay-1-active {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.reveal-delay-2 {
+  opacity: 0;
+  transform: translateY(30px) translateZ(0);
+  transition: all 0.7s ease 0.2s;
+}
+
+.reveal-delay-2-active {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.nav-links a {
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--purple);
+  transform: translateX(4px);
+}
 
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
