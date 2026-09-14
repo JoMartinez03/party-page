@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/karaoke.html", "destination": "/karaoke", "permanent": true },
+    { "source": "/sonido.html", "destination": "/sonido", "permanent": true },
+    { "source": "/iluminacion.html", "destination": "/iluminacion", "permanent": true },
+    { "source": "/playstation5.html", "destination": "/playstation5", "permanent": true }
+  ]
+}
