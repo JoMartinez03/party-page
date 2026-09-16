@@ -30,11 +30,45 @@ const animatedObserver = new IntersectionObserver(entries => {
 }, { threshold: .08 });
 document.querySelectorAll('.service-card,.trust-item,.contact-card').forEach(el => animatedObserver.observe(el));
 
-document.querySelectorAll('.faq-item button').forEach(button => button.addEventListener('click', () => {
-  const item = button.closest('.faq-item');
-  document.querySelectorAll('.faq-item').forEach(other => { if (other !== item) other.classList.remove('active'); });
-  item.classList.toggle('active');
-}));
+const faqCarousel = document.querySelector('.faq-carousel');
+if (faqCarousel) {
+  const track = faqCarousel.querySelector('.faq-track');
+  const slides = [...faqCarousel.querySelectorAll('.faq-slide')];
+  const prev = faqCarousel.querySelector('.faq-prev');
+  const next = faqCarousel.querySelector('.faq-next');
+  const current = faqCarousel.querySelector('.faq-current');
+  const dotsWrap = faqCarousel.querySelector('.faq-dots');
+  let faqIndex = 0;
+  let touchStartX = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'faq-dot';
+    dot.setAttribute('aria-label', `Ir a la pregunta ${i + 1}`);
+    dot.addEventListener('click', () => { faqIndex = i; updateFaq(); });
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = [...dotsWrap.querySelectorAll('.faq-dot')];
+  function updateFaq() {
+    track.style.transform = `translateX(-${faqIndex * 100}%)`;
+    current.textContent = faqIndex + 1;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === faqIndex));
+  }
+  function moveFaq(step) {
+    faqIndex = (faqIndex + step + slides.length) % slides.length;
+    updateFaq();
+  }
+  prev.addEventListener('click', () => moveFaq(-1));
+  next.addEventListener('click', () => moveFaq(1));
+  track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const delta = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) > 45) moveFaq(delta < 0 ? 1 : -1);
+  }, { passive: true });
+  updateFaq();
+}
 
 const sections=[...document.querySelectorAll('main section[id]')];
 const navAnchors=[...document.querySelectorAll('.nav-links a[href^="#"]')];
