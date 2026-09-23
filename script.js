@@ -484,6 +484,13 @@ const renderEventMosaic = filter => {
   const preview =
     previewForFilter(filter);
 
+  // Ajusta automáticamente el mosaico según la cantidad de fotos visibles.
+  // Con 4 fotos, la última ocupa todo el espacio libre de la fila inferior.
+  const eventsMosaic = document.querySelector('#eventos .events-mosaic');
+  if (eventsMosaic) {
+    eventsMosaic.classList.toggle('has-four-items', preview.length === 4);
+  }
+
   eventCards.forEach(
     (card, index) => {
 

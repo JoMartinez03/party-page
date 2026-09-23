@@ -2209,3 +2209,16 @@ body {
 
 /* Galería dinámica: oculta slots vacíos cuando una categoría tiene menos de 5 fotos. */
 #eventos .event-photo[hidden],#eventos .event-photo.is-empty{display:none!important}
+
+
+/* Galería inteligente: si hay exactamente 4 fotos, la última completa el hueco. */
+#eventos .events-mosaic.has-four-items .event-photo:nth-child(4){
+  grid-column:2 / 4;
+  grid-row:2;
+}
+@media(max-width:900px){
+  #eventos .events-mosaic.has-four-items .event-photo:nth-child(4){
+    grid-column:1 / 3;
+    grid-row:auto;
+  }
+}
